@@ -1,4 +1,5 @@
 const net = require('net');
+
 const connect = function() {
   const conn = net.createConnection({
     host: '165.227.47.243',
@@ -9,7 +10,7 @@ const connect = function() {
 
   conn.on('connect', () => {
     console.log('Successfully connected to game server!');
-    conn.write('Name: DON');
+    conn.write('Name: AIM');
   });
 
   conn.on('data', (data) => {
@@ -18,22 +19,4 @@ const connect = function() {
   return conn;
 };
 
-const setupInput = function() {
-  const stdin = process.stdin;
-  stdin.setRawMode(true);
-  stdin.setEncoding('utf8');
-  stdin.resume();
-
-  stdin.on('data', handleUserInput);
-
-  return stdin;
-};
-
-const handleUserInput = function(data) {
-  if (data === '\u0003') {
-    console.log('EXITING')
-    process.exit();
-  }
-};
-
-module.exports = { connect, setupInput };
+module.exports = { connect };
